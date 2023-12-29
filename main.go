@@ -4,11 +4,34 @@ package main
 
 import (
 	"github.com/cloudwego/hertz/pkg/app/server"
+	"github.com/hertz-contrib/cors"
+	"github.com/hertz-contrib/pprof"
+	"time"
+	_ "ulog-backend/biz/dal"
+	"ulog-backend/config"
 )
 
 func main() {
-	h := server.Default()
+	// Config
+	h := server.New(
+		server.WithHostPorts(config.Server.HostPort()),
+		server.WithRedirectTrailingSlash(false),
+	)
 
+	// CORS
+	h.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost", "http://127.0.0.1"},
+		AllowMethods:     []string{"PUT", "PATCH"},
+		AllowHeaders:     []string{"Origin", "Access-Control-Request-Headers"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
+
+	// Pprof
+	pprof.Register(h)
+
+	// Router
 	register(h)
 	h.Spin()
 }

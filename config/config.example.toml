@@ -1,0 +1,15 @@
+[server]
+host = "127.0.0.1"
+port = "8080"
+[db]
+host = "postgres"
+user = "postgres"
+password = "12345678"
+dbname = "ulog"
+port = "5432"
+sslmode = "disable"
+TimeZone = "Asia/Shanghai"
+[jwt]
+key = "TESTKEY, REPLACE BEFORE PRODUCT"
+identityKey = "token"
+userIDKey = "userID"
