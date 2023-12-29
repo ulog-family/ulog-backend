@@ -29,13 +29,15 @@ func newArticle(db *gorm.DB, opts ...gen.DOOption) article {
 	_article.ALL = field.NewAsterisk(tableName)
 	_article.ID = field.NewInt64(tableName, "id")
 	_article.Title = field.NewString(tableName, "title")
-	_article.UpdateAt = field.NewTime(tableName, "update_at")
-	_article.CreateAt = field.NewTime(tableName, "create_at")
+	_article.UpdatedAt = field.NewTime(tableName, "updated_at")
+	_article.CreatedAt = field.NewTime(tableName, "created_at")
 	_article.Content = field.NewString(tableName, "content")
 	_article.Like = field.NewInt64(tableName, "like")
 	_article.Read = field.NewInt64(tableName, "read")
 	_article.Category = field.NewString(tableName, "category")
 	_article.Password = field.NewString(tableName, "password")
+	_article.UpdateAt = field.NewTime(tableName, "update_at")
+	_article.CreateAt = field.NewTime(tableName, "create_at")
 	_article.Tags = articleManyToManyTags{
 		db: db.Session(&gorm.Session{}),
 
@@ -87,17 +89,19 @@ func newArticle(db *gorm.DB, opts ...gen.DOOption) article {
 type article struct {
 	articleDo
 
-	ALL      field.Asterisk
-	ID       field.Int64
-	Title    field.String
-	UpdateAt field.Time
-	CreateAt field.Time
-	Content  field.String
-	Like     field.Int64
-	Read     field.Int64
-	Category field.String
-	Password field.String
-	Tags     articleManyToManyTags
+	ALL       field.Asterisk
+	ID        field.Int64
+	Title     field.String
+	UpdatedAt field.Time
+	CreatedAt field.Time
+	Content   field.String
+	Like      field.Int64
+	Read      field.Int64
+	Category  field.String
+	Password  field.String
+	UpdateAt  field.Time
+	CreateAt  field.Time
+	Tags      articleManyToManyTags
 
 	Authors articleManyToManyAuthors
 
@@ -120,13 +124,15 @@ func (a *article) updateTableName(table string) *article {
 	a.ALL = field.NewAsterisk(table)
 	a.ID = field.NewInt64(table, "id")
 	a.Title = field.NewString(table, "title")
-	a.UpdateAt = field.NewTime(table, "update_at")
-	a.CreateAt = field.NewTime(table, "create_at")
+	a.UpdatedAt = field.NewTime(table, "updated_at")
+	a.CreatedAt = field.NewTime(table, "created_at")
 	a.Content = field.NewString(table, "content")
 	a.Like = field.NewInt64(table, "like")
 	a.Read = field.NewInt64(table, "read")
 	a.Category = field.NewString(table, "category")
 	a.Password = field.NewString(table, "password")
+	a.UpdateAt = field.NewTime(table, "update_at")
+	a.CreateAt = field.NewTime(table, "create_at")
 
 	a.fillFieldMap()
 
@@ -143,16 +149,18 @@ func (a *article) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *article) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 12)
+	a.fieldMap = make(map[string]field.Expr, 14)
 	a.fieldMap["id"] = a.ID
 	a.fieldMap["title"] = a.Title
-	a.fieldMap["update_at"] = a.UpdateAt
-	a.fieldMap["create_at"] = a.CreateAt
+	a.fieldMap["updated_at"] = a.UpdatedAt
+	a.fieldMap["created_at"] = a.CreatedAt
 	a.fieldMap["content"] = a.Content
 	a.fieldMap["like"] = a.Like
 	a.fieldMap["read"] = a.Read
 	a.fieldMap["category"] = a.Category
 	a.fieldMap["password"] = a.Password
+	a.fieldMap["update_at"] = a.UpdateAt
+	a.fieldMap["create_at"] = a.CreateAt
 
 }
 

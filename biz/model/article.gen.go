@@ -12,18 +12,20 @@ const TableNameArticle = "article"
 
 // Article mapped from table <article>
 type Article struct {
-	ID       int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Title    string     `gorm:"column:title;not null" json:"title"`
-	UpdateAt *time.Time `gorm:"column:update_at;not null;default:now()" json:"update_at"`
-	CreateAt *time.Time `gorm:"column:create_at;not null;default:now()" json:"create_at"`
-	Content  *string    `gorm:"column:content" json:"content"`
-	Like     *int64     `gorm:"column:like" json:"like"`
-	Read     *int64     `gorm:"column:read" json:"read"`
-	Category *string    `gorm:"column:category;not null;default:default" json:"category"`
-	Password *string    `gorm:"column:password" json:"-"`
-	Tags     []Tag      `gorm:"many2many:articles_tags" json:"tags,omitempty"`
-	Authors  []User     `gorm:"many2many:articles_authors" json:"authors,omitempty"`
-	Fans     []User     `gorm:"many2many:articles_likes" json:"fans,omitempty"`
+	ID        int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	Title     string     `gorm:"column:title;not null" json:"title"`
+	UpdatedAt *time.Time `gorm:"column:updated_at;not null;default:now()" json:"updated_at"`
+	CreatedAt *time.Time `gorm:"column:created_at;not null;default:now()" json:"created_at"`
+	Content   *string    `gorm:"column:content" json:"content"`
+	Like      *int64     `gorm:"column:like" json:"like"`
+	Read      *int64     `gorm:"column:read" json:"read"`
+	Category  *string    `gorm:"column:category;not null;default:default" json:"category"`
+	Password  *string    `gorm:"column:password" json:"-"`
+	UpdateAt  *time.Time `gorm:"column:update_at;not null;default:now()" json:"update_at"`
+	CreateAt  *time.Time `gorm:"column:create_at;not null;default:now()" json:"create_at"`
+	Tags      []Tag      `gorm:"many2many:articles_tags" json:"tags,omitempty"`
+	Authors   []User     `gorm:"many2many:articles_authors" json:"authors,omitempty"`
+	Fans      []User     `gorm:"many2many:articles_likes" json:"fans,omitempty"`
 }
 
 // TableName Article's table name

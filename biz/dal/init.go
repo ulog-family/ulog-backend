@@ -49,8 +49,8 @@ func init() {
 		gen.FieldNewTag("password", field.Tag{"json": "-"}),
 		gen.FieldNewTag("email", field.Tag{"json": "email,omitempty"}),
 		gen.FieldNewTag("birthday", field.Tag{"json": "birthday,omitempty"}),
-		gen.FieldNewTag("create_at", field.Tag{"json": "-"}),
-		gen.FieldNewTag("update_at", field.Tag{"json": "-"}),
+		gen.FieldNewTag("created_at", field.Tag{"json": "-"}),
+		gen.FieldNewTag("updated_at", field.Tag{"json": "-"}),
 	)
 	articleModel := g.GenerateModel("article",
 		gen.FieldRelate(field.Many2Many, "Tags", tagModel, &field.RelateConfig{

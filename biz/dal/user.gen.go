@@ -34,6 +34,8 @@ func newUser(db *gorm.DB, opts ...gen.DOOption) user {
 	_user.Avatar = field.NewString(tableName, "avatar")
 	_user.Birthday = field.NewTime(tableName, "birthday")
 	_user.Email = field.NewString(tableName, "email")
+	_user.CreatedAt = field.NewTime(tableName, "created_at")
+	_user.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_user.CreateAt = field.NewTime(tableName, "create_at")
 	_user.UpdateAt = field.NewTime(tableName, "update_at")
 	_user.Articles = userManyToManyArticles{
@@ -56,17 +58,19 @@ func newUser(db *gorm.DB, opts ...gen.DOOption) user {
 type user struct {
 	userDo
 
-	ALL      field.Asterisk
-	ID       field.Int64
-	UUID     field.String
-	Name     field.String
-	Password field.String
-	Avatar   field.String
-	Birthday field.Time
-	Email    field.String
-	CreateAt field.Time
-	UpdateAt field.Time
-	Articles userManyToManyArticles
+	ALL       field.Asterisk
+	ID        field.Int64
+	UUID      field.String
+	Name      field.String
+	Password  field.String
+	Avatar    field.String
+	Birthday  field.Time
+	Email     field.String
+	CreatedAt field.Time
+	UpdatedAt field.Time
+	CreateAt  field.Time
+	UpdateAt  field.Time
+	Articles  userManyToManyArticles
 
 	Likes userManyToManyLikes
 
@@ -92,6 +96,8 @@ func (u *user) updateTableName(table string) *user {
 	u.Avatar = field.NewString(table, "avatar")
 	u.Birthday = field.NewTime(table, "birthday")
 	u.Email = field.NewString(table, "email")
+	u.CreatedAt = field.NewTime(table, "created_at")
+	u.UpdatedAt = field.NewTime(table, "updated_at")
 	u.CreateAt = field.NewTime(table, "create_at")
 	u.UpdateAt = field.NewTime(table, "update_at")
 
@@ -110,7 +116,7 @@ func (u *user) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (u *user) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 11)
+	u.fieldMap = make(map[string]field.Expr, 13)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["uuid"] = u.UUID
 	u.fieldMap["name"] = u.Name
@@ -118,6 +124,8 @@ func (u *user) fillFieldMap() {
 	u.fieldMap["avatar"] = u.Avatar
 	u.fieldMap["birthday"] = u.Birthday
 	u.fieldMap["email"] = u.Email
+	u.fieldMap["created_at"] = u.CreatedAt
+	u.fieldMap["updated_at"] = u.UpdatedAt
 	u.fieldMap["create_at"] = u.CreateAt
 	u.fieldMap["update_at"] = u.UpdateAt
 
