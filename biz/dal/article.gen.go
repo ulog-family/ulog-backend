@@ -35,6 +35,7 @@ func newArticle(db *gorm.DB, opts ...gen.DOOption) article {
 	_article.Like = field.NewInt64(tableName, "like")
 	_article.Read = field.NewInt64(tableName, "read")
 	_article.Category = field.NewString(tableName, "category")
+	_article.Password = field.NewString(tableName, "password")
 	_article.Tags = articleManyToManyTags{
 		db: db.Session(&gorm.Session{}),
 
@@ -95,6 +96,7 @@ type article struct {
 	Like     field.Int64
 	Read     field.Int64
 	Category field.String
+	Password field.String
 	Tags     articleManyToManyTags
 
 	Authors articleManyToManyAuthors
@@ -124,6 +126,7 @@ func (a *article) updateTableName(table string) *article {
 	a.Like = field.NewInt64(table, "like")
 	a.Read = field.NewInt64(table, "read")
 	a.Category = field.NewString(table, "category")
+	a.Password = field.NewString(table, "password")
 
 	a.fillFieldMap()
 
@@ -140,7 +143,7 @@ func (a *article) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *article) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 11)
+	a.fieldMap = make(map[string]field.Expr, 12)
 	a.fieldMap["id"] = a.ID
 	a.fieldMap["title"] = a.Title
 	a.fieldMap["update_at"] = a.UpdateAt
@@ -149,6 +152,7 @@ func (a *article) fillFieldMap() {
 	a.fieldMap["like"] = a.Like
 	a.fieldMap["read"] = a.Read
 	a.fieldMap["category"] = a.Category
+	a.fieldMap["password"] = a.Password
 
 }
 
