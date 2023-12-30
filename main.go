@@ -4,7 +4,6 @@ package main
 
 import (
 	"github.com/cloudwego/hertz/pkg/app/server"
-	"github.com/hertz-contrib/autotls"
 	"github.com/hertz-contrib/cors"
 	"github.com/hertz-contrib/pprof"
 	"time"
@@ -17,7 +16,7 @@ func main() {
 	h := server.New(
 		server.WithHostPorts(config.Server.HostPort()),
 		server.WithRedirectTrailingSlash(false),
-		server.WithTLS(autotls.NewTlsConfig("amcones.top")),
+		//server.WithTLS(autotls.NewTlsConfig("amcones.top")),
 	)
 
 	// CORS
