@@ -11,5 +11,27 @@ import (
 func customizedRegister(r *server.Hertz) {
 	r.GET("/ping", handler.Ping)
 
-	// your code ...
+	articleGroup := r.Group("/article")
+	articleGroup.GET(".")
+	articleGroup.GET("/:id")
+	articleGroup.GET("/:id/info")
+	articleGroup.GET("/article/category")
+	articleGroup.POST("")
+	articleGroup.POST("")
+	articleGroup.DELETE("")
+
+	tagGroup := r.Group("/tag")
+	tagGroup.GET(".")
+	tagGroup.POST(".")
+	tagGroup.DELETE("/:id")
+
+	userGroup := r.Group("/user")
+	userGroup.GET("/user/:name")
+	userGroup.GET("/login/passkey")
+	userGroup.GET("/register/passkey")
+	userGroup.POST("/user/login/:method")
+	userGroup.POST("/user/register/:method")
+	userGroup.POST("/user/forget")
+	userGroup.POST("/user/logout")
+	userGroup.DELETE("/user/:id")
 }
