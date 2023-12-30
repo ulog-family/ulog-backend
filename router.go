@@ -12,8 +12,8 @@ func customizedRegister(r *server.Hertz) {
 	r.GET("/ping", handler.Ping)
 
 	articleGroup := r.Group("/article")
-	articleGroup.GET(".", handler.GetArticleList)
-	articleGroup.GET("/:id", handler.GetArticleById)
+	articleGroup.GET(".")
+	articleGroup.GET("/:id")
 	articleGroup.GET("/:id/info", handler.GetArticleInfoById)
 	articleGroup.GET("/category")
 	articleGroup.POST("/:id/like")
