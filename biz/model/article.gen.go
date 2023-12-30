@@ -21,8 +21,6 @@ type Article struct {
 	Read      *int64     `gorm:"column:read" json:"read"`
 	Category  *string    `gorm:"column:category;not null;default:default" json:"category"`
 	Password  *string    `gorm:"column:password" json:"-"`
-	UpdateAt  *time.Time `gorm:"column:update_at;not null;default:now()" json:"update_at"`
-	CreateAt  *time.Time `gorm:"column:create_at;not null;default:now()" json:"create_at"`
 	Tags      []Tag      `gorm:"many2many:articles_tags" json:"tags,omitempty"`
 	Authors   []User     `gorm:"many2many:articles_authors" json:"authors,omitempty"`
 	Fans      []User     `gorm:"many2many:articles_likes" json:"fans,omitempty"`
