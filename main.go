@@ -16,6 +16,7 @@ func main() {
 	h := server.New(
 		server.WithHostPorts(config.Server.HostPort()),
 		server.WithRedirectTrailingSlash(false),
+		//server.WithTLS(autotls.NewTlsConfig("amcones.top")),
 	)
 
 	// CORS
