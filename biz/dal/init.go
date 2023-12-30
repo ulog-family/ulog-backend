@@ -5,7 +5,6 @@ import (
 	"gorm.io/gen"
 	"gorm.io/gen/field"
 	"gorm.io/gorm"
-	"ulog-backend/biz/model"
 	"ulog-backend/config"
 )
 
@@ -23,10 +22,10 @@ func init() {
 	if err != nil {
 		panic("连接数据库失败")
 	}
-	err = db.AutoMigrate(&model.Article{}, &model.Tag{}, &model.User{})
-	if err != nil {
-		panic("迁移数据表失败")
-	}
+	//err = db.AutoMigrate(&model.Article{}, &model.Tag{}, &model.User{})
+	//if err != nil {
+	//	panic("迁移数据表失败")
+	//}
 	g.UseDB(db)
 	tagModel := g.GenerateModel("tag",
 		gen.FieldRelate(field.Many2Many, "Articles", g.GenerateModel("article"), &field.RelateConfig{

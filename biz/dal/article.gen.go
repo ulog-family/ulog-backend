@@ -36,8 +36,6 @@ func newArticle(db *gorm.DB, opts ...gen.DOOption) article {
 	_article.Read = field.NewInt64(tableName, "read")
 	_article.Category = field.NewString(tableName, "category")
 	_article.Password = field.NewString(tableName, "password")
-	_article.UpdateAt = field.NewTime(tableName, "update_at")
-	_article.CreateAt = field.NewTime(tableName, "create_at")
 	_article.Tags = articleManyToManyTags{
 		db: db.Session(&gorm.Session{}),
 
@@ -99,8 +97,6 @@ type article struct {
 	Read      field.Int64
 	Category  field.String
 	Password  field.String
-	UpdateAt  field.Time
-	CreateAt  field.Time
 	Tags      articleManyToManyTags
 
 	Authors articleManyToManyAuthors
@@ -131,8 +127,6 @@ func (a *article) updateTableName(table string) *article {
 	a.Read = field.NewInt64(table, "read")
 	a.Category = field.NewString(table, "category")
 	a.Password = field.NewString(table, "password")
-	a.UpdateAt = field.NewTime(table, "update_at")
-	a.CreateAt = field.NewTime(table, "create_at")
 
 	a.fillFieldMap()
 
@@ -149,7 +143,7 @@ func (a *article) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *article) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 14)
+	a.fieldMap = make(map[string]field.Expr, 12)
 	a.fieldMap["id"] = a.ID
 	a.fieldMap["title"] = a.Title
 	a.fieldMap["updated_at"] = a.UpdatedAt
@@ -159,8 +153,6 @@ func (a *article) fillFieldMap() {
 	a.fieldMap["read"] = a.Read
 	a.fieldMap["category"] = a.Category
 	a.fieldMap["password"] = a.Password
-	a.fieldMap["update_at"] = a.UpdateAt
-	a.fieldMap["create_at"] = a.CreateAt
 
 }
 
