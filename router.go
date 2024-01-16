@@ -21,8 +21,8 @@ func customizedRegister(r *server.Hertz) {
 	articleGroup.DELETE("/:id")
 
 	tagGroup := r.Group("/tag")
-	tagGroup.GET(".")
-	tagGroup.POST(".")
+	tagGroup.GET(".", handler.GetTagList)
+	tagGroup.POST(".", handler.AddTag)
 
 	userGroup := r.Group("/user")
 	userGroup.GET("/:name")
