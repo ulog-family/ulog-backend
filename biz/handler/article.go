@@ -47,3 +47,12 @@ func GetArticleList(ctx context.Context, c *app.RequestContext) {
 	}
 	c.JSON(http.StatusOK, articleList)
 }
+
+func GetArticleCategoryList(ctx context.Context, c *app.RequestContext) {
+	categoryList, err := service.NewArticleService(ctx, c).GetCategoryList()
+	if err != nil {
+		c.JSON(http.StatusNotFound, buildServiceErrResp(err))
+		return
+	}
+	c.JSON(http.StatusOK, categoryList)
+}
