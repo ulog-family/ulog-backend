@@ -46,3 +46,22 @@ func (articleService ArticleService) GetArticleList() ([]*model.Article, error) 
 	}
 	return articleList, nil
 }
+
+func (articleService ArticleService) GetCategoryList() ([]*model.Category, error) {
+	articleList, err := a.Select(a.Category).Find()
+	if err != nil {
+		return nil, err
+	}
+	filter := map[string]int64{}
+	for _, article := range articleList {
+		filter[*article.Category]++
+	}
+	var categoryList []*model.Category
+	for k, v := range filter {
+		categoryList = append(categoryList, &model.Category{
+			Name: k,
+			Num:  v,
+		})
+	}
+	return categoryList, nil
+}
