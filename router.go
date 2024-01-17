@@ -25,7 +25,7 @@ func customizedRegister(r *server.Hertz) {
 	tagGroup.POST(".", handler.AddTag)
 
 	userGroup := r.Group("/user")
-	userGroup.GET("/:name")
+	userGroup.GET("/:name", handler.GetUserInfo)
 	userGroup.POST("/login/:method")
 	userGroup.POST("/register/:method")
 	userGroup.POST("/forget")

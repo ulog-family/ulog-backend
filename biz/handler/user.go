@@ -1,0 +1,32 @@
+package handler
+
+import (
+	"context"
+	"github.com/cloudwego/hertz/pkg/app"
+	"net/http"
+	"ulog-backend/biz/service"
+)
+
+func GetUserInfo(ctx context.Context, c *app.RequestContext) {
+	var req struct {
+		Name string `path:"name,required"`
+	}
+	if err := c.BindAndValidate(&req); err != nil {
+		c.JSON(http.StatusBadRequest, buildParamErrResp(err))
+		return
+	}
+	user, err := service.NewUserService(ctx, c).GetUserInfoByName(req.Name)
+	if err != nil {
+		c.JSON(http.StatusNotFound, buildServiceErrResp(err))
+		return
+	}
+	c.JSON(http.StatusOK, user)
+}
+
+func RegisterUser(ctx context.Context, c *app.RequestContext) {
+
+}
+
+func LoginUser(ctx context.Context, c *app.RequestContext) {
+
+}
