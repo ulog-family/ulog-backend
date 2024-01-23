@@ -8,6 +8,7 @@ import (
 	"github.com/hertz-contrib/pprof"
 	"time"
 	_ "ulog-backend/biz/dal"
+	"ulog-backend/biz/mw"
 	"ulog-backend/config"
 )
 
@@ -28,6 +29,9 @@ func main() {
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))
+
+	// JWT
+	mw.JWTInit()
 
 	// Pprof
 	pprof.Register(h)
